@@ -16,7 +16,7 @@ public class Player {
 	}
 
 	public void setOccuping(Room occuping) {
-		occuping = occuping;
+		this.occuping = occuping;
 	}
 
 	public RoomSection getViewing() {

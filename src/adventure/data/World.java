@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 import adventure.model.Door;
+import adventure.model.Furniture;
 import adventure.model.GameObject;
 import adventure.model.Game;
 import adventure.model.Player;
@@ -81,7 +82,10 @@ public class World implements KeyListener, MouseListener {
 					}}
 				),
 				new RoomSection("East", woodWall),
-				new RoomSection("South", woodWall),
+				new RoomSection("South", woodWall,new ArrayList<GameObject>(){{
+					this.add(new Furniture(woodTable, "A wooden table",10,160));
+					}}
+				),
 				new RoomSection("West", woodWall) 
 		};
 		room2.setSections(room2Sec);
@@ -99,7 +103,10 @@ public class World implements KeyListener, MouseListener {
 			for(GameObject o: player.getViewing().getContains())
 			{
 				if (o.intersects(e.getX(), e.getY()))
+				{
 					o.use(player);
+					frame.repaint();
+				}
 			}
 	}
 
