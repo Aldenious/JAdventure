@@ -10,7 +10,7 @@ public class Room {
 	private final Image background; // This is the default backdrop of a room,
 									// all walls are
 	// painted with this.
-	private final RoomSection[] sections; // This defines the number of
+	private RoomSection[] sections; // This defines the number of
 											// 'Sections' a given
 
 	// i.e. the amount of views contained in it,
@@ -75,6 +75,10 @@ public class Room {
 
 	public RoomSection[] getSections() {
 		return sections;
+	}
+
+	public void setSections(RoomSection[] sections) {
+		this.sections = sections;
 	}
 
 }

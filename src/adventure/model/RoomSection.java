@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
 
+import adventure.model.GameObject;
+
 public class RoomSection {
 	final String Name;
 	final int sizeX, sizeY; // defines the height and length of a room when
@@ -15,21 +17,6 @@ public class RoomSection {
 									// objects.
 
 	/**
-	 * Default Constructor, use this to populate the room section!
-	 * 
-	 * @param background
-	 * @param contains
-	 */
-	public RoomSection(String name, Image background,
-			ArrayList<GameObject> contains) {
-		this.Name = name;
-		this.sizeX = background.getWidth(null);
-		this.sizeY = background.getHeight(null);
-		this.background = background;
-		this.contains = contains;
-	}
-
-	/**
 	 * Constructor for use in creating blank room sections, for both game and
 	 * testing purposes
 	 */
@@ -39,6 +26,21 @@ public class RoomSection {
 		this.sizeY = background.getHeight(null);
 		this.background = background;
 		this.contains = new ArrayList<GameObject>();
+	}
+
+	/**
+	 * Default Constructor, use this to populate the room section!
+	 * 
+	 * @param background
+	 * @param arrayList
+	 */
+	public RoomSection(String name, Image background,
+			ArrayList<GameObject> arrayList) {
+		this.Name = name;
+		this.sizeX = background.getWidth(null);
+		this.sizeY = background.getHeight(null);
+		this.background = background;
+		this.contains = arrayList;
 	}
 
 	public void draw(Graphics g) {

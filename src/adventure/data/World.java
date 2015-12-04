@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+import adventure.model.Door;
+import adventure.model.GameObject;
 import adventure.model.Game;
 import adventure.model.Player;
 import adventure.model.Room;
@@ -20,14 +22,15 @@ import adventure.view.AdventureFrame;
 public class World implements KeyListener, MouseListener {
 	final Game game;
 	final AdventureFrame frame;
-	final Player player;
+	Player player;
 	final static Image brickWall = loadImage("Brick_Wall.jpg");
 	final static Image woodTable = loadImage("wood_table.jpg");
 	final static Image woodWall = loadImage("wood_wall.jpg");
+	final static Image WoodDoor = loadImage("Wood_Door.jpg");
 	
 	public World()
 	{
-		game = SimpleRoom();
+		game = BasicGame();
 		frame = new AdventureFrame("game", game, this, this);
 		player = game.getPlayer();
 	}
@@ -56,11 +59,48 @@ public class World implements KeyListener, MouseListener {
 		return new Game(rooms, new Player(rooms.get(0),rooms.get(0).getSections()[0],null));
 	}
 	
+	public static Game BasicGame()
+	{
+		ArrayList<Room> rooms = new ArrayList<Room>();
+		Room room1 = new Room("Room1",brickWall,null);
+		Room room2 = new Room("Room2",woodWall,null);
+		
+		RoomSection[] room1Sec = new RoomSection[]{
+				new RoomSection("North", brickWall,new ArrayList<GameObject>(){{
+					this.add(new Door(room2,WoodDoor, "A wooden door",10,160));
+					}}),
+				new RoomSection("East", brickWall),
+				new RoomSection("South", brickWall),
+				new RoomSection("West", brickWall) 
+		};
+		room1.setSections(room1Sec);
+		
+		RoomSection[] room2Sec = new RoomSection[]{
+				new RoomSection("North", woodWall,new ArrayList<GameObject>(){{
+					this.add(new Door(room1,WoodDoor, "A wooden door",10,160));
+					}}
+				),
+				new RoomSection("East", woodWall),
+				new RoomSection("South", woodWall),
+				new RoomSection("West", woodWall) 
+		};
+		room2.setSections(room2Sec);
+		
+		rooms.add(room1);
+		rooms.add(room2);
+		return new Game(rooms, new Player(rooms.get(0),rooms.get(0).getSections()[0],null));
+	}
+	
 	//gameplay methods
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-			
+		System.out.println("Clicked : " + e.getX() + "," +e.getY());
+			for(GameObject o: player.getViewing().getContains())
+			{
+				if (o.intersects(e.getX(), e.getY()))
+					o.use(player);
+			}
 	}
 
 	@Override

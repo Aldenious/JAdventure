@@ -8,11 +8,13 @@ public abstract class GameObject {
 	private final String info; // Stored information on the object
 	private int x,y; // object's position in the RoomSection - defined as pixel locations from top left?
 	
-	public abstract boolean use();
+	public abstract boolean use(Player player);
 
-	public GameObject(Image image, String info) {
+	public GameObject(Image image, String info , int x, int y) {
 		this.image = image;
 		this.info = info;
+		this.x = x;
+		this.y = y;
 	}
 	
 	public void PrintInfo(){

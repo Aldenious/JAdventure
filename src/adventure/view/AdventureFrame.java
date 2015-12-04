@@ -24,6 +24,7 @@ public class AdventureFrame extends JFrame {
 				canvas.addKeyListener(k);
 			}
 		}
+		canvas.addMouseListener(mouse);
 		add(canvas, BorderLayout.CENTER);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
