@@ -14,6 +14,7 @@ import adventure.model.Door;
 import adventure.model.Furniture;
 import adventure.model.GameObject;
 import adventure.model.Game;
+import adventure.model.Key;
 import adventure.model.Player;
 import adventure.model.Room;
 import adventure.model.RoomSection;
@@ -31,10 +32,13 @@ public class World implements KeyListener, MouseListener {
 	private final Game game;
 	private final AdventureFrame frame;
 	private Player player;
-	private final static Image brickWall = loadImage("Brick_Wall.jpg");
+	
+	// images to load to create the game.
+	private final static Image brickWall = loadImage("brick_Wall.jpg");
 	private final static Image woodTable = loadImage("wood_table.jpg");
 	private final static Image woodWall = loadImage("wood_wall.jpg");
-	private final static Image WoodDoor = loadImage("Wood_Door.jpg");
+	private final static Image woodDoor = loadImage("wood_Door.jpg");
+	private final static Image key = loadImage("key.jpg");
 	
 	/**
 	 * This constructor is used to define what world is being utilized.
@@ -61,7 +65,7 @@ public class World implements KeyListener, MouseListener {
 	}
 	
 	/**
-	 * Test world, use to to prove roomsection customisation.
+	 * Test world, use to to prove RoomSection customization.
 	 * @return a test Game()
 	 */
 	public static Game SimpleRoom()
@@ -87,12 +91,15 @@ public class World implements KeyListener, MouseListener {
 		ArrayList<Room> rooms = new ArrayList<Room>();
 		Room room1 = new Room("Room1",brickWall,null);
 		Room room2 = new Room("Room2",woodWall,null);
+		Key key1 = new Key(key ,"A metal key",10,160);
 		
 		RoomSection[] room1Sec = new RoomSection[]{
 				new RoomSection("North", brickWall,new ArrayList<GameObject>(){{
-					this.add(new Door(room2,WoodDoor, "A wooden door",10,160));
+					this.add(new Door(room2,key1 ,woodDoor, "A wooden door",10,160));
 					}}),
-				new RoomSection("East", brickWall),
+				new RoomSection("East", brickWall,new ArrayList<GameObject>(){{
+					this.add(key1);
+					}}),
 				new RoomSection("South", brickWall),
 				new RoomSection("West", brickWall) 
 		};
@@ -100,7 +107,7 @@ public class World implements KeyListener, MouseListener {
 		
 		RoomSection[] room2Sec = new RoomSection[]{
 				new RoomSection("North", woodWall,new ArrayList<GameObject>(){{
-					this.add(new Door(room1,WoodDoor, "A wooden door",10,160));
+					this.add(new Door(room1,woodDoor, "A wooden door",10,160));
 					}}
 				),
 				new RoomSection("East", woodWall),
@@ -114,10 +121,10 @@ public class World implements KeyListener, MouseListener {
 		
 		rooms.add(room1);
 		rooms.add(room2);
-		return new Game(rooms, new Player(rooms.get(0),rooms.get(0).getSections()[0],null));
+		return new Game(rooms, new Player(rooms.get(0),rooms.get(0).getSections()[0]));
 	}
 	
-	//gameplay methods
+	//Listener methods
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -128,6 +135,7 @@ public class World implements KeyListener, MouseListener {
 				{
 					o.use(player);
 					frame.repaint();
+					return;
 				}
 			}
 	}

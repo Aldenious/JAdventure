@@ -3,32 +3,42 @@ package adventure.model;
 import java.awt.Graphics;
 import java.awt.Image;
 
+/**
+ * Game object is the main definition of a object stored in a RoomSection in
+ * Adventure. It is abstract, and it's children GameProp, and GameItem are also
+ * abstract. GameObject is defined in order to define the commonality between
+ * all GameObjects.
+ * 
+ * @author Aidan
+ *
+ */
 public abstract class GameObject {
-	private final Image image; //the objects manifestation in the gameworld
+	private final Image image; // the objects manifestation in the gameworld
 	private final String info; // Stored information on the object
-	private int x,y; // object's position in the RoomSection - defined as pixel locations from top left?
-	
+	private int x, y; // object's position in the RoomSection - defined as pixel
+						// locations from top left?
+
 	public abstract boolean use(Player player);
 
-	public GameObject(Image image, String info , int x, int y) {
+	public GameObject(Image image, String info, int x, int y) {
 		this.image = image;
 		this.info = info;
 		this.x = x;
 		this.y = y;
 	}
-	
-	public void PrintInfo(){
-		// TODO prints the given objects info to somewhere on the GUI for now, just prints to console
+
+	public void PrintInfo() {
+		// TODO prints the given objects info to somewhere on the GUI for now,
+		// just prints to console
 		System.out.println(info);
 	}
 
-	public void draw(Graphics g)
-	{
-		g.drawImage(image,x,y,null,null);
+	public void draw(Graphics g) {
+		g.drawImage(image, x, y, null, null);
 	}
-	
+
 	// Helper methods
-	
+
 	public int getX() {
 		return x;
 	}
@@ -55,15 +65,16 @@ public abstract class GameObject {
 
 	/**
 	 * This method returns if a given x and y position intercepts this objects
-	 * Bounding box, defined as it's own image. No item should intercept each other
-	 * in the world such that when a world is loaded, all positions should contain a
-	 * unique object. This is mostly used as a method to facilitate said purpose.
+	 * Bounding box, defined as it's own image. No item should intercept each
+	 * other in the world such that when a world is loaded, all positions should
+	 * contain a unique object. This is mostly used as a method to facilitate
+	 * said purpose.
+	 * 
 	 * @param x
 	 * @param y
 	 * @return True/ False based on given X, Y co-ords.
 	 */
-	public boolean intersects(int x, int y)
-	{
+	public boolean intersects(int x, int y) {
 		if (x >= this.x && this.x + image.getWidth(null) >= x)
 			if (y >= this.y && this.y + image.getHeight(null) >= y)
 				return true;

@@ -9,6 +9,10 @@ public class Inventory {
 		this.storedItems = new ArrayList<GameItem>();
 	}
 	
+	public Inventory(ArrayList<GameItem> contents){
+		this.storedItems = contents;
+	}
+	
 	public void add(GameItem item){
 		storedItems.add(item);
 	}

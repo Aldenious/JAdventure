@@ -11,6 +11,12 @@ public class Player {
 		this.inv = inv;
 	}
 	
+	public Player(Room occuping, RoomSection viewing) {
+		this.occuping = occuping;
+		this.viewing = viewing;
+		this.inv = new Inventory();
+	}
+	
 	public Room getOccuping() {
 		return occuping;
 	}
