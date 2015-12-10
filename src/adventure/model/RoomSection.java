@@ -118,7 +118,7 @@ public class RoomSection {
 	 * @return contains 
 	 * 			ArrayList of GameObject's, contents of this current RoomSection
 	 */
-	public ArrayList<GameObject> getContains() {
+	public ArrayList<GameObject> getContents() {
 		return contains;
 	}
 

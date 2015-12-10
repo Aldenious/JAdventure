@@ -122,7 +122,7 @@ public class World implements KeyListener, MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		System.out.println("Clicked : " + e.getX() + "," +e.getY());
-			for(GameObject o: player.getViewing().getContains())
+			for(GameObject o: player.getViewing().getContents())
 			{
 				if (o.intersects(e.getX(), e.getY()))
 				{
