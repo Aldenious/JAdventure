@@ -19,16 +19,27 @@ import adventure.model.Room;
 import adventure.model.RoomSection;
 import adventure.view.AdventureFrame;
 
-
+/**
+ * World is the Main controller class for this project.
+ * It is also the "world" of this project, and is needed to create and assign
+ * a world for the user. The world loads this into the game model, and runs the
+ * game from there.
+ * @author Aidan
+ *
+ */
 public class World implements KeyListener, MouseListener {
-	final Game game;
-	final AdventureFrame frame;
-	Player player;
-	final static Image brickWall = loadImage("Brick_Wall.jpg");
-	final static Image woodTable = loadImage("wood_table.jpg");
-	final static Image woodWall = loadImage("wood_wall.jpg");
-	final static Image WoodDoor = loadImage("Wood_Door.jpg");
+	private final Game game;
+	private final AdventureFrame frame;
+	private Player player;
+	private final static Image brickWall = loadImage("Brick_Wall.jpg");
+	private final static Image woodTable = loadImage("wood_table.jpg");
+	private final static Image woodWall = loadImage("wood_wall.jpg");
+	private final static Image WoodDoor = loadImage("Wood_Door.jpg");
 	
+	/**
+	 * This constructor is used to define what world is being utilized.
+	 * To change the active world, change the game defined here.
+	 */
 	public World()
 	{
 		game = BasicGame();
@@ -36,9 +47,11 @@ public class World implements KeyListener, MouseListener {
 		player = game.getPlayer();
 	}
 	
+	// World definitions
+	
 	/**
 	 * Test world, use to prove world creation and GUI.
-	 * @return
+	 * @return a test Game()
 	 */
 	public static Game BlankRoom()
 	{
@@ -47,6 +60,10 @@ public class World implements KeyListener, MouseListener {
 		return new Game(rooms, new Player(rooms.get(0),rooms.get(0).getSections()[0],null));
 	}
 	
+	/**
+	 * Test world, use to to prove roomsection customisation.
+	 * @return a test Game()
+	 */
 	public static Game SimpleRoom()
 	{
 		ArrayList<Room> rooms = new ArrayList<Room>();
@@ -60,6 +77,11 @@ public class World implements KeyListener, MouseListener {
 		return new Game(rooms, new Player(rooms.get(0),rooms.get(0).getSections()[0],null));
 	}
 	
+	/**
+	 * This world defines a basic game, with objects, and multiple rooms
+	 * This should be used as a example as how to define a real world for Adventure.
+	 * @return 
+	 */
 	public static Game BasicGame()
 	{
 		ArrayList<Room> rooms = new ArrayList<Room>();

@@ -3,7 +3,7 @@ package adventure.model;
 import java.util.ArrayList;
 
 public class Inventory {
-	ArrayList<GameItem> contains;
+	private ArrayList<GameItem> contains;
 	
 	public Inventory() {
 		this.contains = new ArrayList<GameItem>();

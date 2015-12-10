@@ -12,7 +12,7 @@ import adventure.model.RoomSection;
 public class AdventureCanvas extends Canvas
 {
 	private final Game game;
-	RoomSection View;
+	private RoomSection View;
 	
 	public AdventureCanvas(Game game) 
 	{
